@@ -1,25 +1,46 @@
-import avatar from '../images/image.jpg';
+import { useState, useEffect } from 'react';
+import api from '../utils/Api';
 
 function Main({onEditProfile, onAddPlace, onEditAvatar}) {
-    
+    const [userName, setUserName] = useState('Грузимся потихоньку');
+    const [userAvatar, setUserAvatar] = useState('')
+    const [userAbout, setUserAbout] = useState('Грузимся потихоньку');
+    const [cards, setCards] = useState([]);
+
+      useEffect(() => {
+        api
+          .getUserInfo()
+          .then(({name, avatar, about}) => {
+            setUserName(name)
+            setUserAbout(about)
+            setUserAvatar(avatar)
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      }, [])
+
+      
+
     return(
         <main>
           <section className="profile">
             <div className="profile__container">
               <button className="profile__edit-avatar"
                       onClick={onEditAvatar}>
-                <img  src={avatar} 
+                <img  
+                      src={userAvatar}
                       alt="" 
                       className="profile__avatar" />
               </button>
               <div className="profile__info">
                 <div className="profile__personal">
-                  <h1 className="profile__name">Жак-Ив Кусто</h1>
+                  <h1 className="profile__name">{userName}</h1>
                   <button type="button" 
                           className="profile__edit-button"
                           onClick={onEditProfile}></button>
                 </div>
-                <p className="profile__job">Инженер-проектировщик</p>
+                <p className="profile__job">{userAbout}</p>
               </div>
             </div>
             <button type="button" 

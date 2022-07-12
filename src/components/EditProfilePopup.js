@@ -5,7 +5,6 @@ const EditProfilePopup = ({isOpen, onClose}) => {
     const [name, setName] = useState('');
     const [title, setTitle] = useState('');
 
-
     const onValueName = (e) => {
         setName(e.target.value)
     };
@@ -13,8 +12,6 @@ const EditProfilePopup = ({isOpen, onClose}) => {
     const onValueTitle = (e) => {
         setTitle(e.target.value)
     };
-
-
 
     return (
        <PopupWithForm
