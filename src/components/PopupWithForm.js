@@ -1,16 +1,19 @@
-const PopupWithForm = ({title, name, children}) => {
+const PopupWithForm = ({title, name, children, isOpen, onClose}) => {
+
+   
     return(
-        <div className={`popup popup_${name}`}>
+        <div className={isOpen ? `popup popup_${name} popup_opened` : `popup popup_${name}`}>
             <div 
                 className="popup__container">
                 <button 
                     type="button" 
-                    className="popup__button-close"></button>
+                    className="popup__button-close"
+                    onClick={onClose}></button>
                 <form 
                     action="#" 
                     name="{name}" 
                     className="popup__form form-edit" 
-                    novalidate>
+                    noValidate>
                     <fieldset 
                         className="popup__form-set">
                     <h2 
@@ -22,7 +25,7 @@ const PopupWithForm = ({title, name, children}) => {
                     </fieldset>
                 </form>
             </div>
-  </div>
+        </div>
     )
 }
 

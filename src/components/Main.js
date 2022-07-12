@@ -1,37 +1,37 @@
 import avatar from '../images/image.jpg';
 
-function Main() {
-
-    const onHandleEditAvatarClick = () => {
-        document.querySelector('.profile__edit-avatar').addEventListener('click', () => {
-            document.querySelector('.popup_add-avatar').classList.add('popup_opened');
-        })
-    }
+function Main({onEditProfile, onAddPlace, onEditAvatar}) {
     
     return(
         <main>
-      <section class="profile">
-        <div class="profile__container">
-          <button class="profile__edit-avatar"
-                onClick={onHandleEditAvatarClick}>
-            <img src={avatar} alt="" class="profile__avatar" />
-          </button>
-          <div class="profile__info">
-            <div class="profile__personal">
-              <h1 class="profile__name">Жак-Ив Кусто</h1>
-              <button type="button" class="profile__edit-button"></button>
+          <section className="profile">
+            <div className="profile__container">
+              <button className="profile__edit-avatar"
+                      onClick={onEditAvatar}>
+                <img  src={avatar} 
+                      alt="" 
+                      className="profile__avatar" />
+              </button>
+              <div className="profile__info">
+                <div className="profile__personal">
+                  <h1 className="profile__name">Жак-Ив Кусто</h1>
+                  <button type="button" 
+                          className="profile__edit-button"
+                          onClick={onEditProfile}></button>
+                </div>
+                <p className="profile__job">Инженер-проектировщик</p>
+              </div>
             </div>
-            <p class="profile__job">Инженер-проектировщик</p>
-          </div>
-        </div>
-        <button type="button" class="profile__add-button"></button>
-      </section>
-      <section class="elements">
-        <ul class="elements__list">
+            <button type="button" 
+                    className="profile__add-button"
+                    onClick={onAddPlace}></button>
+          </section>
+          <section className="elements">
+            <ul className="elements__list">
 
-        </ul>
-      </section>
-    </main>
+            </ul>
+          </section>
+        </main>
     )
 }
 
