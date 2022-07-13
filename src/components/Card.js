@@ -1,5 +1,5 @@
 
-const Card = ({card, onCardClick}) => {
+const Card = ({card, onCardClick, onConfirmClick}) => {
 
     const handleClick = () => {
         onCardClick(card);
@@ -15,7 +15,8 @@ const Card = ({card, onCardClick}) => {
                 onClick={handleClick}/>
             <button 
                 type="button" 
-                className="elements__item-delete"></button>
+                className="elements__item-delete"
+                onClick={onConfirmClick}></button>
             <div className="elements__description">
                 <h2 className="elements__item-title">{card.name}</h2>
                 <div className="elements__like_container">

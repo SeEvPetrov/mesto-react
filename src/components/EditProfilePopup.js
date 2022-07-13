@@ -17,6 +17,7 @@ const EditProfilePopup = ({isOpen, onClose}) => {
        <PopupWithForm
             title="Редактировать профиль"
             name="edit"
+            textBtn="Сохранить"
             isOpen={isOpen}
             onClose={onClose}
         >

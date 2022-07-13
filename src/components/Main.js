@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Card from './Card';
 import api from '../utils/Api';
 
-function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
+function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick, onConfirmClick}) {
     const [userName, setUserName] = useState('Грузимся потихоньку');
     const [userAvatar, setUserAvatar] = useState('')
     const [userAbout, setUserAbout] = useState('Грузимся потихоньку');
@@ -67,6 +67,7 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
                     <Card 
                       key={id}
                       card={card}
+                      onConfirmClick={onConfirmClick}
                       onCardClick={onCardClick}/>
                   )
                 })}

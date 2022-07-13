@@ -5,6 +5,7 @@ const AddPlacePopup =({ isOpen, onClose })=> {
         <PopupWithForm
             title="Новое место"
             name="add"
+            textBtn="Создать"
             isOpen={isOpen}
             onClose={onClose}
         >

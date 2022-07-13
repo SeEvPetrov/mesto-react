@@ -5,6 +5,7 @@ const EditAvatarPopup=({isOpen, onClose}) => {
         <PopupWithForm
             title="Обновить аватар"
             name="avatar"
+            textBtn="Обновить"
             isOpen={isOpen}
             onClose={onClose}
         >
