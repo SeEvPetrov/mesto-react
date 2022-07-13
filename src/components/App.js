@@ -16,7 +16,7 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({name: '', link: ''});
   const [isConfirmPopupOpen, setIsConfirmPopupOpen] = useState(false);
 
-  const handleEditAvatarClick = () => {
+const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(true);
 };
 
@@ -35,8 +35,6 @@ const handleConfirmDeleteClick = () => {
 const handleCardClick = (card) => {
   setSelectedCard(card);
 };
-
-
 
 const closeAllPopups = () => {
   setIsEditAvatarPopupOpen(false);
