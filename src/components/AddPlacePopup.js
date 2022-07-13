@@ -3,6 +3,8 @@ import PopupWithForm from "./PopupWithForm";
 const AddPlacePopup =({ isOpen, onClose })=> {
     return (
         <PopupWithForm
+            title="Новое место"
+            name="add"
             isOpen={isOpen}
             onClose={onClose}
         >
@@ -15,8 +17,8 @@ const AddPlacePopup =({ isOpen, onClose })=> {
                     required
                     placeholder="Название" 
                     autoComplete="off" 
-                    minLength="2" 
-                    maxLength="30" />
+                    minLength={2}
+                    maxLength={30} />
                 <span 
                     className="popup__input-error" 
                     id="title-error">

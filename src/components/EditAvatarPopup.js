@@ -3,6 +3,8 @@ import PopupWithForm from "./PopupWithForm";
 const EditAvatarPopup=({isOpen, onClose}) => {
     return(
         <PopupWithForm
+            title="Обновить аватар"
+            name="avatar"
             isOpen={isOpen}
             onClose={onClose}
         >

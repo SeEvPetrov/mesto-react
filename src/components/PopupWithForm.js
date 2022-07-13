@@ -1,5 +1,4 @@
 const PopupWithForm = ({title, name, children, isOpen, onClose}) => {
-
    
     return(
         <div className={isOpen ? `popup popup_${name} popup_opened` : `popup popup_${name}`}>

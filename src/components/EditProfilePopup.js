@@ -15,8 +15,8 @@ const EditProfilePopup = ({isOpen, onClose}) => {
 
     return (
        <PopupWithForm
-            name={name}
-            title={title}
+            title="Редактировать профиль"
+            name="edit"
             isOpen={isOpen}
             onClose={onClose}
         >
@@ -29,8 +29,8 @@ const EditProfilePopup = ({isOpen, onClose}) => {
                     required
                     placeholder="Введите имя" 
                     autoComplete="off" 
-                    minLength="2" 
-                    maxLength="40" 
+                    minLength={2} 
+                    maxLength={40}
                     value={name}
                     onChange={onValueName}/>
                 <span  
@@ -47,8 +47,8 @@ const EditProfilePopup = ({isOpen, onClose}) => {
                     required
                     placeholder="Введите профессию" 
                     autoComplete="off" 
-                    minLength="2" 
-                    maxLength="200" 
+                    minLength={2} 
+                    maxLength={200}
                     value={title}
                     onChange={onValueTitle}/>
                 <span className="popup__input-error" id="about-error">
