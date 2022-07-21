@@ -4,6 +4,7 @@ const Card = ({ card, onCardClick, onConfirmClick }) => {
   };
 
   return (
+
       <li className="elements__item">
         <img
           className="elements__item-img"

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import api from "../utils/Api";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
@@ -7,6 +8,7 @@ import AddPlacePopup from "./AddPlacePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import ImagePopup from "./ImagePopup";
 import ConfirmPopup from "./ConfirmPopup";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -14,6 +16,18 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({ name: "", link: "" });
   const [isConfirmPopupOpen, setIsConfirmPopupOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState({name: "Гружу...", avatar: "мое фото", about: "еще чуть чуть"});
+
+  useEffect(() => {
+    api
+      .getUserInfo()
+      .then((data) => {
+        setCurrentUser(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(true);
@@ -46,6 +60,7 @@ function App() {
   return (
     <div className="page">
       <Header />
+      <CurrentUserContext.Provider value={currentUser}>
       <Main
         onEditProfile={handleEditProfileClick}
         onAddPlace={handleAddPlaceClick}
@@ -53,6 +68,7 @@ function App() {
         onCardClick={handleCardClick}
         onConfirmClick={handleConfirmDeleteClick}
       />
+      </CurrentUserContext.Provider>
       <Footer />
       <EditProfilePopup
         isOpen={isEditProfilePopupOpen}
