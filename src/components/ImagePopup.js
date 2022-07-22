@@ -1,8 +1,6 @@
 const ImagePopup = ({ card, onClose }) => {
   return (
-    <div
-      className={`popup popup_zoom ${card.link && "popup_opened"}`}
-    >
+    <div className={`popup popup_zoom ${card.link && "popup_opened"}`}>
       <div className="popup__container-photo">
         <button
           type="button"

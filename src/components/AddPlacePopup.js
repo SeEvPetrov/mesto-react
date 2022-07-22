@@ -1,6 +1,24 @@
+import { useRef, useEffect } from "react";
 import PopupWithForm from "./PopupWithForm";
 
-const AddPlacePopup = ({ isOpen, onClose }) => {
+const AddPlacePopup = ({ isOpen, onClose, onAddPlace }) => {
+  const inputNameRef = useRef();
+  const inputLinkRef = useRef();
+
+  useEffect(() => {
+    inputNameRef.current.value = "";
+    inputLinkRef.current.value = "";
+  }, [isOpen]);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    onAddPlace({
+      name: inputNameRef.current.value,
+      link: inputLinkRef.current.value,
+    });
+  }
+
   return (
     <PopupWithForm
       title="Новое место"
@@ -8,9 +26,11 @@ const AddPlacePopup = ({ isOpen, onClose }) => {
       textBtn="Создать"
       isOpen={isOpen}
       onClose={onClose}
+      onSubmit={handleSubmit}
     >
       <label className="popup__form-field">
         <input
+          ref={inputNameRef}
           type="text"
           name="name"
           id="title"
@@ -25,6 +45,7 @@ const AddPlacePopup = ({ isOpen, onClose }) => {
       </label>
       <label className="popup__form-field">
         <input
+          ref={inputLinkRef}
           type="url"
           name="link"
           id="link"
