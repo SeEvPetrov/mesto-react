@@ -16,7 +16,10 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({ name: "", link: "" });
   const [isConfirmPopupOpen, setIsConfirmPopupOpen] = useState(false);
-  const [currentUser, setCurrentUser] = useState({name: "Гружу...", avatar: "мое фото", about: "еще чуть чуть"});
+  const [currentUser, setCurrentUser] = useState({
+    name: "Гружу...",
+    about: "еще чуть чуть",
+  });
 
   useEffect(() => {
     api
@@ -28,6 +31,30 @@ function App() {
         console.log(err);
       });
   }, []);
+
+  const handleUpdateUser = (data) => {
+    api
+      .setUserInfo(data)
+      .then((data) => {
+        setCurrentUser(data);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleUpdateAvatar = (data) => {
+    api
+      .setUserAvatar(data.avatar)
+      .then((data) => {
+        setCurrentUser(data);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(true);
@@ -61,35 +88,28 @@ function App() {
     <div className="page">
       <Header />
       <CurrentUserContext.Provider value={currentUser}>
-      <Main
-        onEditProfile={handleEditProfileClick}
-        onAddPlace={handleAddPlaceClick}
-        onEditAvatar={handleEditAvatarClick}
-        onCardClick={handleCardClick}
-        onConfirmClick={handleConfirmDeleteClick}
-      />
+        <Main
+          onEditProfile={handleEditProfileClick}
+          onAddPlace={handleAddPlaceClick}
+          onEditAvatar={handleEditAvatarClick}
+          onCardClick={handleCardClick}
+          onConfirmClick={handleConfirmDeleteClick}
+        />
+        <Footer />
+        <EditProfilePopup
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
+          onUpdateUser={handleUpdateUser}
+        />
+        <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} />
+        <EditAvatarPopup
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+          onUpdateAvatar={handleUpdateAvatar}
+        />
+        <ConfirmPopup isOpen={isConfirmPopupOpen} onClose={closeAllPopups} />
+        <ImagePopup card={selectedCard} onClose={closeAllPopups} />
       </CurrentUserContext.Provider>
-      <Footer />
-      <EditProfilePopup
-        isOpen={isEditProfilePopupOpen}
-        onClose={closeAllPopups}
-      />
-      <AddPlacePopup 
-        isOpen={isAddPlacePopupOpen} 
-        onClose={closeAllPopups} 
-      />
-      <EditAvatarPopup
-        isOpen={isEditAvatarPopupOpen}
-        onClose={closeAllPopups}
-      />
-      <ConfirmPopup 
-        isOpen={isConfirmPopupOpen} 
-        onClose={closeAllPopups} 
-      />
-      <ImagePopup 
-        card={selectedCard} 
-        onClose={closeAllPopups} 
-      />
     </div>
   );
 }

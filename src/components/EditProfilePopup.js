@@ -1,25 +1,43 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import PopupWithForm from "./PopupWithForm";
 
-const EditProfilePopup = ({ isOpen, onClose }) => {
+const EditProfilePopup = ({ isOpen, onClose, onUpdateUser }) => {
   const [name, setName] = useState("");
-  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const currentUser = useContext(CurrentUserContext);
+
+  useEffect(() => {
+    setName(currentUser.name);
+    setDescription(currentUser.about);
+  }, [currentUser]);
 
   const onValueName = (e) => {
     setName(e.target.value);
   };
 
-  const onValueTitle = (e) => {
-    setTitle(e.target.value);
+  const onValueDescription = (e) => {
+    setDescription(e.target.value);
   };
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    // Передаём значения управляемых компонентов во внешний обработчик
+    onUpdateUser({
+      name,
+      about: description,
+    });
+  }
 
   return (
     <PopupWithForm
-      title="Редактировать профиль"
+      Description="Редактировать профиль"
       name="edit"
       textBtn="Сохранить"
       isOpen={isOpen}
       onClose={onClose}
+      onSubmit={handleSubmit}
     >
       <label className="popup__form-field">
         <input
@@ -48,8 +66,8 @@ const EditProfilePopup = ({ isOpen, onClose }) => {
           autoComplete="off"
           minLength={2}
           maxLength={200}
-          value={title}
-          onChange={onValueTitle}
+          value={description}
+          onChange={onValueDescription}
         />
         <span className="popup__input-error" id="about-error"></span>
       </label>
