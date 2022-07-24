@@ -17,7 +17,7 @@ const PopupWithForm = ({
         ></button>
         <form
           action="#"
-          name="{name}"
+          name={name}
           className="popup__form form-edit"
           noValidate
           onSubmit={onSubmit}
